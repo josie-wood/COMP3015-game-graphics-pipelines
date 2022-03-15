@@ -5,6 +5,7 @@
 
 #include <glad/glad.h>
 #include "helper/glslprogram.h"
+#include "helper/torus.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -12,10 +13,13 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
-    GLuint vaoHandle;
+    //GLuint vaoHandle; lab2 removed
     GLSLProgram prog;
-    float angle;
+    //float angle; lab2 removed
     glm::mat4 rotationMatrix;
+    Torus torus; //lab2 add
+
+    void setMatrices(); //lab2 add
 
     void compile();
 
