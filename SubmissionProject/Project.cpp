@@ -117,16 +117,6 @@ init(void)
 		{7, 5, 6 }   // second Triangle
 	};
 
-	GLfloat  colours[][4] = {
-		0.583f,  0.771f,  0.014f,
-	0.609f,  0.115f,  0.436f,
-	0.327f,  0.483f,  0.844f,
-	0.822f,  0.569f,  0.201f,
-	0.435f,  0.602f,  0.223f,
-	0.310f,  0.747f,  0.185f,
-	0.597f,  0.770f,  0.761f,
-	0.559f,  0.436f,  0.730f,
-	};
 	GLfloat  texture_coords[] = {
 		 1.0f, 1.0f,
 		 1.0f, 0.0f,
@@ -157,13 +147,13 @@ init(void)
 	glVertexAttribPointer(vPosition, 3, GL_FLOAT,
 		GL_FALSE, 0, BUFFER_OFFSET(0));
 	
-	//Colour Binding
-	glBindBuffer(GL_ARRAY_BUFFER, Buffers[Colours]);
-	glBufferStorage(GL_ARRAY_BUFFER, sizeof(colours), colours, 0);
+	////Colour Binding
+	//glBindBuffer(GL_ARRAY_BUFFER, Buffers[Colours]);
+	//glBufferStorage(GL_ARRAY_BUFFER, sizeof(colours), colours, 0);
 
 
-	glVertexAttribPointer(cPosition, 4, GL_FLOAT,
-		GL_FALSE, 0, BUFFER_OFFSET(0));
+	//glVertexAttribPointer(cPosition, 4, GL_FLOAT,
+	//	GL_FALSE, 0, BUFFER_OFFSET(0));
 
 	//Texture Binding
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[Tex]);
@@ -172,7 +162,7 @@ init(void)
 		GL_FALSE, 0, BUFFER_OFFSET(0));
 
 	glEnableVertexAttribArray(vPosition);
-	glEnableVertexAttribArray(cPosition);
+	//glEnableVertexAttribArray(cPosition);
 	glEnableVertexAttribArray(tPosition);
 
 	glBindVertexArray(VAOs[1]);
@@ -191,23 +181,23 @@ init(void)
 	glVertexAttribPointer(vPosition, 3, GL_FLOAT,
 		GL_FALSE, 0, BUFFER_OFFSET(0));
 
-	//Colour Binding
-	glBindBuffer(GL_ARRAY_BUFFER, Buffers[Colours]);
-	glBufferStorage(GL_ARRAY_BUFFER, sizeof(colours), colours, 0);
+	////Colour Binding
+	//glBindBuffer(GL_ARRAY_BUFFER, Buffers[Colours]);
+	//glBufferStorage(GL_ARRAY_BUFFER, sizeof(colours), colours, 0);
 
 
-	glVertexAttribPointer(cPosition, 4, GL_FLOAT,
-		GL_FALSE, 0, BUFFER_OFFSET(0));
-
-	////Texture Binding
-	//glBindBuffer(GL_ARRAY_BUFFER, Buffers[Tex]);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(texture_coords), texture_coords, GL_STATIC_DRAW);
-	//glVertexAttribPointer(tPosition, 2, GL_FLOAT,
+	//glVertexAttribPointer(cPosition, 4, GL_FLOAT,
 	//	GL_FALSE, 0, BUFFER_OFFSET(0));
 
+	//Texture Binding
+	glBindBuffer(GL_ARRAY_BUFFER, Buffers[Tex]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(texture_coords), texture_coords, GL_STATIC_DRAW);
+	glVertexAttribPointer(tPosition, 2, GL_FLOAT,
+		GL_FALSE, 0, BUFFER_OFFSET(0));
 
-	//loadTexture(texture1, "media/textures/awesomeface.png");
-	//glUniform1i(glGetUniformLocation(program, "texture1"), 0);
+
+	loadTexture(texture1, "media/textures/awesomeface.png");
+	glUniform1i(glGetUniformLocation(program, "texture1"), 0);
 
 
 
@@ -239,7 +229,7 @@ init(void)
 	glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, glm::value_ptr(mvp));
 
 	glEnableVertexAttribArray(vPosition);
-	glEnableVertexAttribArray(cPosition);
+	//glEnableVertexAttribArray(cPosition);
 	glEnableVertexAttribArray(tPosition);
 }
 
@@ -292,6 +282,37 @@ display(void)
 	
 }
 
+//standard texture loading
+void loadTexture(GLuint& texture, std::string texturepath)
+{
+	// load and create a texture 
+// -------------------------
+
+// texture 1
+// ---------
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	GLint width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+	unsigned char* data = stbi_load(texturepath.c_str(), &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+}
 
 int runTests(std::string value)
 {
