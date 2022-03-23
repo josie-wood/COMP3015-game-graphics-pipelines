@@ -1,0 +1,6 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Coursework2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  LoadShaders.cpp
+  Project.cpp
+  Generating Code...
+glew32sd.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'glew32sd.lib(glew.obj)' or at 'C:\Users\Josie\Desktop\FinalYear\COMP3015 - games graphics\REPO-COMP3015-game-graphics-pipelines\COURSEWORK1\CW1-project\x64\Debug\glew_static.pdb'; linking object as if no debug info
+  Coursework1.vcxproj -> C:\Users\Josie\Desktop\FinalYear\COMP3015 - games graphics\REPO-COMP3015-game-graphics-pipelines\COURSEWORK1\CW1-project\x64\Debug\Coursework1.exe
