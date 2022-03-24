@@ -2,6 +2,7 @@
 
 //in variable that receives the diffuse calculation from the vertex shader
 in vec3 LightIntensity;
+in vec3 celShade;
 
 //out variable, this typical for all fragment shaders
 layout (location = 0) out vec4 FragColor;

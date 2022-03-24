@@ -9,7 +9,7 @@ using glm::vec3;
 using glm::mat4;
 
 //constructor for torus
-SceneBasic_Uniform::SceneBasic_Uniform() : torus(0.7f, 0.3f, 50, 50) {}
+SceneBasic_Uniform::SceneBasic_Uniform() : torus(0.7f, 0.3f, 500, 500) {}
 
 //constructor for teapot
 //SceneBasic_Uniform::SceneBasic_Uniform() : teapot(13, glm::translate(mat4(1.0f), vec3(0.0f, 1.5f, 0.25f))) {}

@@ -7,6 +7,8 @@ layout (location = 1) in vec3 VertexNormal;
 //out vector needed for the fragment shader
 out vec3 LightIntensity; 
  
+//out vec for cell shading details
+out vec3 celShade;
  //light information struct
 uniform struct LightInfo 
 {
@@ -42,8 +44,30 @@ void main()
   //difuse formula for light calculations
   vec3 diffuse = Light.Ld * Material.Kd * sDotN;
 
+if(sDotN == 0.5)
+{
+    
+}
+
+if( sDotN < 0.25)
+{
+sDotN = 0.25;
+}
+else if (sDotN <0.5)
+{
+sDotN = 0.5;
+}
+else{
+sDotN = 0.75;
+}
+  vec3 celShade = Light.Ld * Material.Kd * sDotN;;
+  
+    
+
+    
   //pass the colour to LightIntensity which will transfer it to the fragment shader
-  LightIntensity = diffuse;
+  //LightIntensity = diffuse;
+    LightIntensity = celShade;
 
   //turns any vertex position into model view projection in preparations to 
   //graphics pipeline processes before fragment shader (clipping)
