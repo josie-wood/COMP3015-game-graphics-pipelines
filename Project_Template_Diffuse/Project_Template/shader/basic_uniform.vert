@@ -3,6 +3,9 @@
 //in variables, this are in model coordinates
 layout (location = 0) in vec3 VertexPosition; 
 layout (location = 1) in vec3 VertexNormal; 
+layout (location = 2) in vec2 texCoords;
+
+out vec2 TextCoords;
 
 //out vector needed for the fragment shader
 out vec3 LightIntensity; 
@@ -43,6 +46,8 @@ void main()
 
   //difuse formula for light calculations
   vec3 diffuse = Light.Ld * Material.Kd * sDotN;
+
+TextCoords = texCoords;
 
 
 if( sDotN < 0.25)

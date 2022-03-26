@@ -172,6 +172,10 @@
     <ClInclude Include="helper\trianglemesh.h" />
     <ClInclude Include="scenebasic_uniform.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\teapot-texture-heart.png" />
+    <Image Include="media\teapot-texture.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

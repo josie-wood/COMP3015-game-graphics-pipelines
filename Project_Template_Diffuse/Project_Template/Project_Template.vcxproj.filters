@@ -98,4 +98,12 @@
       <Filter>helper</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\teapot-texture.png">
+      <Filter>media</Filter>
+    </Image>
+    <Image Include="media\teapot-texture-heart.png">
+      <Filter>media</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

@@ -16,11 +16,11 @@ Teapot::Teapot(int grid, const mat4 & lidTransform)
     int faces = grid * grid * 32;
     std::vector<GLfloat> p( verts * 3 );
     std::vector<GLfloat> n( verts * 3 );
-    std::vector<GLfloat> tc( verts * 2 );
+    /*std::vector<GLfloat>*/ tc = std::vector<GLfloat>(verts * 2 ); //tex coords
     std::vector<GLuint> el( faces * 6 );
 
     generatePatches( p, n, tc, el, grid );
-    moveLid(grid, p, lidTransform);
+    //moveLid(grid, p, lidTransform);
 
     initBuffers(&el, &p, &n, &tc);
 }

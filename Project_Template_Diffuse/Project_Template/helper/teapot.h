@@ -33,4 +33,6 @@ private:
 
 public:
     Teapot(int grid, const glm::mat4& lidTransform);
+
+    std::vector<GLfloat> tc;
 };

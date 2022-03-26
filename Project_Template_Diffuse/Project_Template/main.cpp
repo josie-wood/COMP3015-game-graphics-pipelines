@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-	SceneRunner runner("Shader_Basics");
+	SceneRunner runner("Josie Wood - COMP3015 Coursework 1 - Teapot 'toon shader");
 
 	std::unique_ptr<Scene> scene;
 

@@ -13,14 +13,18 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
-    GLSLProgram prog;
     
     //Torus torus;
     Teapot teapot;
 
-    void setMatrices();
+    GLSLProgram prog;
 
+    void loadTextureFromFile(const char* filePath);
+
+    void setMatrices();
     void compile();
+
+    GLuint texturebuffer;
 
 public:
     SceneBasic_Uniform();
