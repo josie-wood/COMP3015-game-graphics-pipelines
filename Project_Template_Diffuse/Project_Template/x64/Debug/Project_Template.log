@@ -1,5 +1,2 @@
-﻿  main.cpp
-  scenebasic_uniform.cpp
-C:\Users\Josie\Desktop\FinalYear\COMP3015 - games graphics\REPO-COMP3015-game-graphics-pipelines\Project_Template_Diffuse\Project_Template\scenebasic_uniform.cpp(15,109): error C2512: 'Torus': no appropriate default constructor available
-C:\Users\Josie\Desktop\FinalYear\COMP3015 - games graphics\REPO-COMP3015-game-graphics-pipelines\Project_Template_Diffuse\Project_Template\helper\torus.h(6,7): message : see declaration of 'Torus'
-  Generating Code...
+﻿  scenebasic_uniform.cpp
+  Project_Template.vcxproj -> C:\Users\Josie\Desktop\FinalYear\COMP3015 - games graphics\REPO-COMP3015-game-graphics-pipelines\Project_Template_Diffuse\Project_Template\x64\Debug\Project_Template.exe

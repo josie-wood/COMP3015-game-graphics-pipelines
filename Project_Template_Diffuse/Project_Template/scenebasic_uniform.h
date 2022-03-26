@@ -14,8 +14,8 @@ class SceneBasic_Uniform : public Scene
 {
 private:
     GLSLProgram prog;
-    /*
-    Torus torus;*/
+    
+    //Torus torus;
     Teapot teapot;
 
     void setMatrices();

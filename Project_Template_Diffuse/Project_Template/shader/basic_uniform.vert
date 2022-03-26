@@ -44,10 +44,6 @@ void main()
   //difuse formula for light calculations
   vec3 diffuse = Light.Ld * Material.Kd * sDotN;
 
-if(sDotN == 0.5)
-{
-    
-}
 
 if( sDotN < 0.25)
 {
@@ -57,8 +53,12 @@ else if (sDotN <0.5)
 {
 sDotN = 0.5;
 }
-else{
+else if (sDotN <0.75)
+{
 sDotN = 0.75;
+}
+else{
+sDotN = 0.99;
 }
   vec3 celShade = Light.Ld * Material.Kd * sDotN;;
   

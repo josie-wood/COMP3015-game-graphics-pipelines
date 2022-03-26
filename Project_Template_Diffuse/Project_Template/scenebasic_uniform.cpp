@@ -21,7 +21,7 @@ void SceneBasic_Uniform::initScene()
    
     //initialise the model matrix
     model = mat4(1.0f);
-    //
+    
     ////enable this group for torus rendering, make sure you comment the teapot group
     //model = glm::rotate(model, glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f)); //rotate model on x axis
     //model = glm::rotate(model, glm::radians(15.0f), vec3(0.0f, 1.0f, 0.0f));  //rotate model on y axis
@@ -30,7 +30,7 @@ void SceneBasic_Uniform::initScene()
     //enable this group for teapot rendering, make sure you comment the torus group
     model = glm::translate(model, vec3(0.0, -1.0, 0.0));
     model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
-    view = glm::lookAt(vec3(2.0f, 4.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(vec3(4.0f, 4.0f, 4.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
     projection = mat4(1.0f);
 
@@ -56,6 +56,10 @@ void SceneBasic_Uniform::compile()
 void SceneBasic_Uniform::update( float t )
 {
 	//update your angle here
+    
+
+    model = glm::rotate(model, glm::radians(1.0f), vec3(0.0f, 0.0f, 1.0f));
+    //model = glm::rotate(model, glm::radians(1.0f), vec3(0.0f, 1.0f, 0.0f));  //rotate model on y axis
 }
 
 void SceneBasic_Uniform::render()
