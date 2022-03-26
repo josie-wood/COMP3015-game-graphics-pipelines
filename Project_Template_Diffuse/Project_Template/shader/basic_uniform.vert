@@ -9,9 +9,8 @@ layout (location = 2) in vec2 texCoords;
 out vec2 TextCoords;
 out vec3 LightIntensity; 
 out vec3 celShade;
-
-//uniforms
-uniform vec3 cameraPos;
+out vec3 lightDirection;
+out vec3 normal;
 
  //light information struct
 uniform struct LightInfo 
@@ -35,18 +34,18 @@ void main()
 { 
   //transfrom normal from model coordinates to view coordinates
     vec3 n = normalize( NormalMatrix * VertexNormal);
-
+    normal = n;
   //transform vertex position from model coordinates to view coordinates
     vec4 pos = ModelViewMatrix * vec4(VertexPosition,1.0);
 
   //calculate light direction, notice the light is already in the view coordinates 
     vec3 s = normalize(vec3(Light.Position - pos));
 
+    lightDirection = s;
+
   //calculate dot product for vector s and n using max. Read about max in glsl documentation, if not clear talk to me
     float sDotN = max( dot(s,n), 0.0 );
-
-
-    
+  
   //calculate bands of shadows based on sDotN
 
     if( sDotN < 0.25)
