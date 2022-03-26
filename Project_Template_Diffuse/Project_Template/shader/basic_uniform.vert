@@ -1,17 +1,18 @@
 #version 460
 
-//in variables, this are in model coordinates
+//in variables
 layout (location = 0) in vec3 VertexPosition; 
 layout (location = 1) in vec3 VertexNormal; 
 layout (location = 2) in vec2 texCoords;
 
+//out variables
 out vec2 TextCoords;
-
-//out vector needed for the fragment shader
 out vec3 LightIntensity; 
- 
-//out vec for cell shading details
 out vec3 celShade;
+
+//uniforms
+uniform vec3 cameraPos;
+
  //light information struct
 uniform struct LightInfo 
 {
@@ -33,48 +34,45 @@ uniform mat4 MVP;				//model view projection matrix
 void main() 
 { 
   //transfrom normal from model coordinates to view coordinates
-  vec3 n = normalize( NormalMatrix * VertexNormal);
+    vec3 n = normalize( NormalMatrix * VertexNormal);
 
   //transform vertex position from model coordinates to view coordinates
-  vec4 pos = ModelViewMatrix * vec4(VertexPosition,1.0);
+    vec4 pos = ModelViewMatrix * vec4(VertexPosition,1.0);
 
   //calculate light direction, notice the light is already in the view coordinates 
-  vec3 s = normalize(vec3(Light.Position - pos));
+    vec3 s = normalize(vec3(Light.Position - pos));
 
   //calculate dot product for vector s and n using max. Read about max in glsl documentation, if not clear talk to me
-  float sDotN = max( dot(s,n), 0.0 );
-
-  //difuse formula for light calculations
-  vec3 diffuse = Light.Ld * Material.Kd * sDotN;
-
-TextCoords = texCoords;
+    float sDotN = max( dot(s,n), 0.0 );
 
 
-if( sDotN < 0.25)
-{
-sDotN = 0.25;
-}
-else if (sDotN <0.5)
-{
-sDotN = 0.5;
-}
-else if (sDotN <0.75)
-{
-sDotN = 0.75;
-}
-else{
-sDotN = 0.99;
-}
-  vec3 celShade = Light.Ld * Material.Kd * sDotN;;
-  
     
+  //calculate bands of shadows based on sDotN
 
+    if( sDotN < 0.25)
+    {
+        sDotN = 0.25;
+    }
+    else if (sDotN <0.5)
+    {
+        sDotN = 0.5;
+    }
+    else if (sDotN <0.75)
+    {
+        sDotN = 0.75;
+    }
+    else
+{
+        sDotN = 0.99;
+    }
+      
     
   //pass the colour to LightIntensity which will transfer it to the fragment shader
-  //LightIntensity = diffuse;
-    LightIntensity = celShade;
+    LightIntensity = Light.Ld * Material.Kd * sDotN;;
 
   //turns any vertex position into model view projection in preparations to 
   //graphics pipeline processes before fragment shader (clipping)
-  gl_Position = MVP * vec4(VertexPosition,1.0); 
+     gl_Position = MVP * vec4(VertexPosition,1.0); 
+
+    TextCoords = texCoords;
 } 

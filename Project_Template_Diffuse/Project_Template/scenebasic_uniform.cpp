@@ -11,8 +11,8 @@ using glm::mat4;
 #define STB_IMAGE_IMPLEMENTATION
 #include "helper/stb/stb_image.h"
 
-//constructor for torus
-//SceneBasic_Uniform::SceneBasic_Uniform() : torus(0.7f, 0.3f, 500, 500) {}
+//variables
+vec3 cameraPos = vec3(4.0f, 4.0f, 4.0f);
 
 //constructor for teapot
 SceneBasic_Uniform::SceneBasic_Uniform() : teapot(150, glm::translate(mat4(1.0f), vec3(0.0f, 1.5f, 0.25f))) {}
@@ -25,22 +25,17 @@ void SceneBasic_Uniform::initScene()
     //initialise the model matrix
     model = mat4(1.0f);
     
-    ////enable this group for torus rendering, make sure you comment the teapot group
-    //model = glm::rotate(model, glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f)); //rotate model on x axis
-    //model = glm::rotate(model, glm::radians(15.0f), vec3(0.0f, 1.0f, 0.0f));  //rotate model on y axis
-    //view = glm::lookAt(vec3(0.0f, 0.0f, 2.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f)); //sets the view - read in the documentation about glm::lookAt. if still have questions,come an dtalk to me
-
-    //enable this group for teapot rendering, make sure you comment the torus group
     model = glm::translate(model, vec3(0.0, -1.0, 0.0));
     model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
-    view = glm::lookAt(vec3(4.0f, 4.0f, 4.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(cameraPos, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
     projection = mat4(1.0f);
 
-    //make sure you use the correct name, check your vertex shader
-    prog.setUniform("Material.Kd", 0.9f, 0.7f, 0.8f); //seting the Kd uniform
-    prog.setUniform("Light.Ld", 1.0f, 1.0f, 1.0f);     //setting the Ld uniform
-    prog.setUniform("Light.Position", view * glm::vec4(5.0f, 5.0f, 2.0f, 0.0f)); //setting Light Position
+    //uniforms
+    prog.setUniform("Material.Kd", 0.9f, 0.7f, 0.8f); 
+    prog.setUniform("Light.Ld", 1.0f, 1.0f, 1.0f);    
+    prog.setUniform("Light.Position", view * glm::vec4(5.0f, 5.0f, 2.0f, 0.0f)); 
+    prog.setUniform("CameraPosition", cameraPos);
 
     loadTextureFromFile("media/teapot-texture-heart.png");
     
@@ -65,11 +60,8 @@ void SceneBasic_Uniform::compile()
 
 void SceneBasic_Uniform::update( float t )
 {
-	//update your angle here
-    
-
-    model = glm::rotate(model, glm::radians(1.0f), vec3(0.0f, 0.0f, 1.0f));
-    //model = glm::rotate(model, glm::radians(1.0f), vec3(0.0f, 1.0f, 0.0f));  //rotate model on y axis
+    //rotating the model to show off shader
+    model = glm::rotate(model, glm::radians(1.0f), vec3(0.0f, 0.0f, -1.0f));
 }
 
 void SceneBasic_Uniform::render()
@@ -77,10 +69,8 @@ void SceneBasic_Uniform::render()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     setMatrices(); //we set matrices 
-    //torus.render();     //we render the torus
+    
     teapot.render();
-
-
 }
 
 void SceneBasic_Uniform::setMatrices()
