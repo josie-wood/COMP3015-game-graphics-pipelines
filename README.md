@@ -1,5 +1,7 @@
 # COMP3015-game-graphics-pipelines - Toon Teapot Shader
 
+![Shader screenshot](https://github.com/josie-wood/COMP3015-game-graphics-pipelines/blob/main/SubmissionProject/shader-screenshot.png)
+
 ### Which version Visual Studio and Operating System you used to test/write the code locally?
 I wrote the code in Visual Studio 2019 with Windows 10.
 
