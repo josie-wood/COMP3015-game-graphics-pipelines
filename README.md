@@ -25,7 +25,9 @@ The model is instantiated in from the provided teapot.cpp method.
 The model data is passed through basic_uniform.vert and the basic_uniform.frag. 
 
 ### Anything else which will help us to understand how your prototype works.
-I build my prototype around the given project template.
+I built my prototype around the given project template.
 For this prototype, the model used needs to be high poly to ensure smooth shadows. 
 
 ### A Link to the unlisted YouTube Video
+https://youtu.be/DA_WGD_tWdw
+
